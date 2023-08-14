@@ -1,22 +1,23 @@
+import 'package:auth_manager_flutter/core/auth_manager.dart';
+import 'package:auth_manager_flutter/splash/splash_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_use_case_php_api/login/login.dart';
+import 'package:provider/provider.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(MultiProvider(
+      providers: [
+        Provider<AuthenticationManager>(
+          create: (context) => AuthenticationManager(context: context),
+        )
+      ],
+      child: MyApp(),
+    ));
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: Login(),
+      title: 'Material App',
+      home: SplashView(),
     );
   }
 }
